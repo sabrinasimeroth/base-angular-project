@@ -1,28 +1,130 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
 
-    <!-- inject:css -->
-    <!-- endinject -->
-  </head>
-  <body ng-controller="WhateverController as whateverCtrl">
-    <h1>My app</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Budget Tracker App</title>
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <!-- endbower -->
 
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- endbower -->
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
 
-    <!-- inject:js -->
-    <!-- endinject -->
-  </body>
+<body ng-controller="homeController as homeCtrl">
+  <div class="container">
+
+    <div class="jumbotron">
+      <header class="container" style="text-align: center">
+        <h1>Budget Tracker</h1>
+      </header>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">Income Entries</div>
+          <div class="panel-body">
+            <form ng-submit="homeCtrl.addIncome()">
+              <div class="form-group">
+                <label for="incomeDescription">Description</label>
+                <input type="text" ng-model="homeCtrl.incomeDescription" ng-required="homeCtrl.incomeEntry" class="form-control" id="incomeDescription" />
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" ng-model="homeCtrl.incomeEntry" ng-required="homeCtrl.incomeDescription" class="form-control" aria-label="Amount (to the nearest dollar)" />
+                <span class="input-group-addon">.00</span>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-success btn-md btn-block">Add Income</button>
+            </form>
+            <hr align="center">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th style="text-align: right">Amount</th>
+                </tr>
+                <tr ng-repeat="income in homeCtrl.incomes">
+                  <td>{{income.description}}</td>
+                  <td style="text-align: right">{{income.amount | currency}}</td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-danger">
+          <div class="panel-heading">Expense Entries</div>
+          <div class="panel-body">
+            <form ng-submit="homeCtrl.addExpenses()">
+              <div class="form-group">
+                <label for="expenseDescription">Description</label>
+                <input type="text" ng-model="homeCtrl.expenseDescription" ng-required="homeCtrl.expenseEntry" class="form-control" id="expenseDescription" />
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" ng-model="homeCtrl.expenseEntry" ng-required="homeCtrl.expenseDescription" class="form-control" aria-label="Amount (to the nearest dollar)" />
+                <span class="input-group-addon">.00</span>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-danger btn-md btn-block">Add Expense</button>
+            </form>
+            <hr align="center">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th style="text-align: right">Amount</th>
+                </tr>
+                <tr ng-repeat="expense in homeCtrl.expenses">
+                  <td>{{expense.description}}</td>
+                  <td style="text-align: right">{{expense.amount | currency}}</td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Summary</div>
+        <div class="panel-body">
+          <div class="col-md-5 col-md-offset-1">
+            <h5 style="text-align: center">Total Income</h5>
+            <p style="text-align: center">{{homeCtrl.totalIncome()}}</p>
+          </div>
+          <div class="col-md-5 col-md-offset-1">
+            <h5 style="text-align: center">Total Expenses</h5>
+            <p style="text-align: center">{{}}</p>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h5 style="text-align: center">Left after spending</h5>
+            <p style="text-align: center">{{}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- endbower -->
+
+  <!-- inject:js -->
+  <script src="app/app.module.js"></script>
+  <script src="app/budget/budget.controller.js"></script>
+  <!-- endinject -->
+</body>
 
 </html>

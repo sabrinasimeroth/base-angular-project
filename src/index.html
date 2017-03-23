@@ -99,15 +99,15 @@
         <div class="panel-body">
           <div class="col-md-5 col-md-offset-1">
             <h5 style="text-align: center">Total Income</h5>
-            <p style="text-align: center">{{homeCtrl.totalIncome()}}</p>
+            <p style="text-align: center">{{homeCtrl.totalIncome() | currency}}</p>
           </div>
           <div class="col-md-5 col-md-offset-1">
             <h5 style="text-align: center">Total Expenses</h5>
-            <p style="text-align: center">{{}}</p>
+            <p style="text-align: center">{{homeCtrl.totalExpense() | currency}}</p>
           </div>
           <div class="col-md-6 col-md-offset-3">
             <h5 style="text-align: center">Left after spending</h5>
-            <p style="text-align: center">{{}}</p>
+            <p style="text-align: center">{{homeCtrl.totalIncome() - homeCtrl.totalExpense() | currency}}</p>
           </div>
         </div>
       </div>

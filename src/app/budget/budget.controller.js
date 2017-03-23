@@ -31,8 +31,14 @@
               total += (vm.incomes[i].amount);
           }
           return total;
-
         }
 
+        vm.totalExpense = function(){
+          var total = 0;
+          for(var i = 0; i < vm.expenses.length; i++){
+              total += (vm.expenses[i].amount);
+          }
+          return total;
+        }
     }
 })();
